@@ -12,6 +12,7 @@ const TableHeaderColumn = ({
   const tooltipId = uuid.v4();
   const style = {
     justifyContent: column.center ? 'center' : null,
+    cursor: 'pointer',
   };
 
   return (
