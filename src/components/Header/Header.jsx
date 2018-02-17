@@ -67,15 +67,15 @@ const TabContainer = styled.div`
   justify-content: center;
 `;
 
-const LogoGroup = ({ small }) => (
+const LogoGroup = ({ medium }) => (
   <VerticalAlignToolbar>
-    {!small && <BurgerMenu menuItems={burgerItems} />}
+    {!medium && <BurgerMenu menuItems={burgerItems} />}
     <AppLogo style={{ marginRight: 18 }} />
   </VerticalAlignToolbar>
 );
 
 LogoGroup.propTypes = {
-  small: PropTypes.bool,
+  medium: PropTypes.bool,
 };
 
 const LinkGroup = () => (
@@ -184,16 +184,16 @@ const AdBannerDiv = styled.div`
   }
 `;
 
-const Header = ({ location, small, user }) => (
+const Header = ({ location, medium, user }) => (
   <div>
     <ToolbarHeader>
       <VerticalAlignDiv>
-        <LogoGroup small={small} />
-        {small && <LinkGroup />}
+        <LogoGroup resize={medium} />
+        {medium && <LinkGroup />}
         <SearchGroup />
       </VerticalAlignDiv>
       <VerticalAlignDiv style={{ marginLeft: 'auto' }}>
-        {small && <AccountGroup />}
+        {medium && <AccountGroup />}
         {<SettingsGroup user={user} />}
       </VerticalAlignDiv>
     </ToolbarHeader>
@@ -210,12 +210,12 @@ const Header = ({ location, small, user }) => (
 
 Header.propTypes = {
   location: PropTypes.shape({}),
-  small: PropTypes.bool,
+  medium: PropTypes.bool,
   user: PropTypes.shape({}),
 };
 
 const mapStateToProps = state => ({
-  small: state.browser.greaterThan.small,
+  medium: state.browser.greaterThan.medium,
   user: state.app.metadata.data.user,
 });
 export default connect(mapStateToProps, null)(Header);
