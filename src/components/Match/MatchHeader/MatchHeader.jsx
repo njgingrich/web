@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { transformations, isRadiant, sum } from 'utility';
+import { getTeamLogoUrl, transformations, isRadiant, sum } from 'utility';
 import strings from 'lang';
 import Spinner from 'components/Spinner';
 import { IconRadiant, IconDire } from 'components/Icons';
@@ -216,6 +216,12 @@ const Styled = styled.header`
 }
 `;
 
+const TeamLogo = styled.img`
+  display: block;
+  margin: 0 auto;
+  padding-bottom: 8px;
+`;
+
 const getWinnerStyle = (radiantWin) => {
   if (radiantWin === null || radiantWin === undefined) {
     return 'nowinner';
@@ -232,7 +238,13 @@ const MatchHeader = ({ match, user, loading }) => {
     const victorySection = match.radiant_win
       ? (
         <span>
-          <IconRadiant />
+          {match.radiant_team ?
+            <TeamLogo
+              src={getTeamLogoUrl(match.radiant_team.logo_url)}
+              alt=""
+            /> :
+            <IconRadiant />
+          }
           {match.radiant_team && match.radiant_team.name
           ? `${match.radiant_team.name} ${strings.match_team_win}`
           : strings.match_radiant_win
@@ -240,7 +252,13 @@ const MatchHeader = ({ match, user, loading }) => {
         </span>)
       : (
         <span>
-          <IconDire />
+          {match.dire_team ?
+            <TeamLogo
+              src={getTeamLogoUrl(match.dire_team.logo_url)}
+              alt=""
+            /> :
+            <IconDire />
+          }
           {match.dire_team && match.dire_team.name
           ? `${match.dire_team.name} ${strings.match_team_win}`
           : strings.match_dire_win
