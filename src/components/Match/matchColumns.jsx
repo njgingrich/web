@@ -800,7 +800,7 @@ export const unitKillsColumns = [
     displayFn: (row, col, field) =>
       (
         <div>
-          {Object.keys(field || {}).map((unit, index) => <div key={index}>{`${field[unit]} ${unit}`}</div>)}
+          {Object.keys(field || {}).map(unit => <div key={unit}>{`${field[unit]} ${unit}`}</div>)}
         </div>),
     sumFn: (acc, row) => {
       const result = (acc != null) ? acc : {};
@@ -813,7 +813,7 @@ export const unitKillsColumns = [
     },
     displaySumFn: totals => (
       <div>
-        {Object.keys(totals || {}).map((unit, index) => <div key={index}>{`${totals[unit]} ${unit}`}</div>)}
+        {Object.keys(totals || {}).map(unit => <div key={unit}>{`${totals[unit]} ${unit}`}</div>)}
       </div>
     ),
   },
@@ -870,9 +870,9 @@ export const cosmeticsColumns = [
     displayName: strings.th_cosmetics,
     field: 'cosmetics',
     displayFn: (row, col, field) =>
-      field.map((cosmetic, i) =>
+      field.map(cosmetic =>
         (
-          <StyledCosmetic key={i} data-tip data-for={`cosmetic_${cosmetic.item_id}`}>
+          <StyledCosmetic key={cosmetic.item_id} data-tip data-for={`cosmetic_${cosmetic.item_id}`}>
             <a href={`http://steamcommunity.com/market/listings/570/${cosmetic.name}`} target="_blank" rel="noopener noreferrer">
               <img
                 src={`${process.env.REACT_APP_API_HOST}/apps/570/${cosmetic.image_path}`}
@@ -1126,11 +1126,11 @@ const computeAverage = (row, type) => {
       totalDuration.push(duration);
     }
   });
-  let sum = 0;
+  let durationSum = 0;
   for (let i = 0; i < totalDuration.length; i += 1) {
-    sum += totalDuration[i];
+    durationSum += totalDuration[i];
   }
-  const avg = sum / totalDuration.length;
+  const avg = durationSum / totalDuration.length;
 
   return avg;
 };

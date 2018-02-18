@@ -94,9 +94,9 @@ const SliderTicks = props => (
         }
 
         return (
-          <a role="link" tabIndex={0} key={tick} onClick={() => props.onTickClick(tick)} onKeyPress={() => {}} className={classNames.join(' ')} style={{ left: `${percent}%` }}>
+          <button role="link" tabIndex={0} key={tick} onClick={() => props.onTickClick(tick)} onKeyPress={() => {}} className={classNames.join(' ')} style={{ left: `${percent}%` }}>
             {formatSeconds(tick)}
-          </a>
+          </button>
         );
       })}
     </div>

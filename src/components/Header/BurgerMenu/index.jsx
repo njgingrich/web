@@ -40,6 +40,8 @@ export default class BurgerMenu extends React.Component {
             {this.props.menuItems.map((item, index) => {
               const linkElement = React.cloneElement(item, { style: { width: '100%', display: 'block' } });
               return (
+                // In this case, using the index is fine
+                // eslint-disable-next-line
                 <StyledMenuItem key={index} onClick={this.handleClose}>
                   {linkElement}
                 </StyledMenuItem>

@@ -266,7 +266,7 @@ const getTombStyle = position => position.reduce(
 export const Tombstones = ({ deathPositions, mapWidth, tooltipKey }) => (
   <div>
     {deathPositions.map((position, index) => (
-      <div key={index}>
+      <div key={position[0].player.player_slot}>
         <TeamfightIcon
           Icon={IconDot}
           position={position[0]}
@@ -281,8 +281,8 @@ export const Tombstones = ({ deathPositions, mapWidth, tooltipKey }) => (
           border
           class={`${getTombStyle(position)}TombstoneTooltip`}
         >
-          {position.map((pos, _index) => (
-            <div key={_index} className="tooltipContainer">
+          {position.map(pos => (
+            <div key={pos.player.player_slot} className="tooltipContainer">
               <PlayerThumb {...pos.player} />
               <div>{strings.tooltip_tombstone_killer}</div>
               <PlayerThumb {...pos.killer} />
@@ -477,6 +477,8 @@ class TeamfightMap extends Component {
                   <Teamfight
                     selected={this.isSelected(teamFight)}
                     hovered={this.isHovered(teamFight)}
+                    // this is ok to key by index since the fights are always sorted by time
+                    // eslint-disable-next-line
                     key={index}
                     onClick={this.onIconClick(teamFight)}
                     position={avgPosition(teamFight)}

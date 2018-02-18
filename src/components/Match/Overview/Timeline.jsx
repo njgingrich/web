@@ -405,6 +405,8 @@ const Timeline = ({
 
                   return (
                     <mark
+                      // data is already sorted based on time so using index as key is fine
+                      // eslint-disable-next-line
                       key={i}
                       className={obj.type === 'teamfight' ? 'teamfight' : side}
                       style={{
@@ -452,7 +454,7 @@ const Timeline = ({
                           <section>
                             {match.players
                               .filter(player => player.player_slot === obj.player_slot)
-                              .map((player, index) => <PlayerThumb key={index} {...player} />)
+                              .map(player => <PlayerThumb key={obj.player_slot} {...player} />)
                             }
                             <span>
                               {obj.key ? strings.timeline_firstblood_key : strings.timeline_firstblood}
@@ -471,7 +473,7 @@ const Timeline = ({
                           match.players
                             .filter(player => player.player_slot === aegis[obj.key].player_slot)
                             .map(player => (
-                              <section key={i}>
+                              <section key={player.player_slot}>
                                 <PlayerThumb {...player} />
                                 <span>
                                   {!aegis[obj.key].act && strings.timeline_aegis_picked_up}
